@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusCrave Core</title>
+    <style>
+        @import url('https://googleapis.com');
+        
+        * { 
+            box-sizing: border-box; 
+            font-family: 'Google Sans', 'Product Sans', 'Outfit', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        body { 
+            background: linear-gradient(180deg, #f8f9fa 0%, #e8eaed 100%); 
+            color: #202124; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            padding: 40px; 
+        }
+
+        .header-title { 
+            font-size: 28px; 
+            font-weight: 500; 
+            color: #1a73e8; /* Restored classic brand blue */
+            margin-bottom: 40px; 
+        }
+
+        .dashboard-container { 
+            max-width: 850px; 
+            width: 100%; 
+            margin: 0 auto; 
+        }
+
+        .welcome-text { 
+            font-size: 26px; 
+            margin-bottom: 25px; 
+        }
+
+        .announcements-card { 
+            background-color: #2b3a4a; /* Restored original dark blue */
+            background-image: linear-gradient(rgba(43,58,74,0.85), rgba(43,58,74,0.85)), url('https://unsplash.com'); 
+            background-size: cover; 
+            background-position: center; 
+            border-radius: 16px; 
+            padding: 30px; 
+            margin-bottom: 40px; 
+            color: #fff; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15); 
+        }
+
+        .announcements-header { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            position: relative; 
+            margin-bottom: 25px; 
+        }
+
+        .announcements-title { 
+            font-size: 34px; 
+        }
+
+        .play-btn { 
+            position: absolute; 
+            right: 0; 
+            width: 42px; 
+            height: 42px; 
+            background: #000; 
+            border: 2px solid #fff; 
+            border-radius: 6px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-decoration: none; 
+            color: #fff; 
+            font-size: 16px; 
+        }
+
+        .announcements-content { 
+            display: grid; 
+            grid-template-columns: 1.1fr 0.9fr; 
+            gap: 35px; 
+        }
+
+        .pledge-text { 
+            font-size: 18px; 
+            line-height: 1.5; 
+            color: #f1f3f4; 
+        }
+
+        .updates-column h3 { 
+            font-size: 24px; 
+            margin-bottom: 15px; 
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
+            padding-bottom: 5px; 
+        }
+
+        .updates-list p { 
+            font-size: 15px; 
+            margin-bottom: 10px; 
+            color: #e8eaed; 
+        }
+
+        /* --- SPOTLIGHTS SECTION --- */
+        .spotlights-section { 
+            background: #7a7a7a; 
+            border-radius: 16px; 
+            padding: 30px; 
+            margin-bottom: 40px; 
+            color: #fff; 
+        }
+
+        .spotlights-title { 
+            font-size: 32px; 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+
+        .spotlight-row { 
+            display: flex; 
+            align-items: center; 
+            gap: 25px; 
+            margin-bottom: 15px; 
+            padding: 12px 20px;
+            border-radius: 12px;
+        }
+
+        /* Rank Style Overrides */
+        .row-gold {
+            background-color: #d4af37; /* Premium Gold theme background */
+            color: #ffffff;
+        }
+
+        .row-silver {
+            background-color: #b0b7bd; /* Premium Silver theme background */
+            color: #ffffff;
+        }
+
+        .spotlight-rank { 
+            font-size: 36px; 
+            font-weight: 600; 
+            width: 30px; 
+        }
+
+        .spotlight-details h3 { 
+            font-size: 22px; 
+            font-weight: 500; 
+        }
+
+        .spotlight-details p { 
+            font-size: 16px; 
+            opacity: 0.9;
+        }
+
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 40px; 
+        }
+
+        .menu-card { 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 16px; 
+            border: 1px solid #dadce0; 
+        }
+
+        .menu-card h2 { 
+            font-size: 22px; 
+            margin-bottom: 15px; 
+            color: #1a73e8;
+        }
+
+        .item-list li { 
+            padding: 15px 0; 
+            border-top: 1px solid #f1f3f4; 
+            list-style: none; 
+        }
+
+        .item-list li:first-child { 
+            border-top: none; 
+        }
+
+        .item-list strong { 
+            color: #202124; 
+            display: block; 
+            font-size: 16px; 
+        }
+
+        .order-btn { 
+            display: inline-block; 
+            margin-top: 10px; 
+            background: #1a73e8; 
+            color: #fff; 
+            text-decoration: none; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            font-size: 14px; 
+        }
+
+        .footer-notice { 
+            font-size: 14px; 
+            color: #5f6368; 
+            margin-top: auto; 
+            padding-top: 40px; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-title">CampusCrave</div>
+
+    <div class="dashboard-container">
+        <h1 class="welcome-text">Welcome Back :)</h1>
+        
+        <!-- ANNOUNCEMENTS -->
+        <div class="announcements-card">
+            <div class="announcements-header">
+                <div class="announcements-title">Announcements!</div>
+                <a class="play-btn" href="https://express.adobe.com/publishedV2/urn:aaid:sc:VA6C2:af8ccbcb-eb95-55eb-898f-0f59763e6711?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" target="_blank">▶</a>
+            </div>
+            <div class="announcements-content">
+                <div class="pledge-text">
+                    I pledge of allegiance to the Flag of the Campus Crave king, and to the Republic for witch it stands, one Delivery under King Sus, indestroyable, with liberty and justice for poopypus the octopus.
+                </div>
+                <div class="updates-column">
+                    <h3>Updates</h3>
+                    <div class="updates-list">
+                        <p>• We Revamped And Gave Ourselves A Brand New Website!!!!!!!</p>
+                        <p>• But Don't Worry We Will Eventually Move The Tutorial And The Rewards Program Here But For Right Now We're Not Going To, But We Will</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPOTLIGHTS WITH GOLD AND SILVER BACKGROUND ROW LAYOUTS -->
+        <div class="spotlights-section">
+            <div class="spotlights-title">Spotlights</div>
+            <div class="spotlight-list">
+                
+                <!-- Gold Background Row -->
+                <div class="spotlight-row row-gold">
+                    <div class="spotlight-rank">1</div>
+                    <div class="spotlight-details">
+                        <h3>Snack House</h3>
+                        <p>Owned By Ethan R</p>
+                    </div>
+                </div>
+
+                <!-- Silver Background Row -->
+                <div class="spotlight-row row-silver">
+                    <div class="spotlight-rank">2</div>
+                    <div class="spotlight-details">
+                        <h3>Aiden G’s Mini Store Of Trinkets</h3>
+                        <p>Owned By Aiden G</p>
+                    </div>
+                </div>
+
+                <!-- Standard Row -->
+                <div class="spotlight-row">
+                    <div class="spotlight-rank">3</div>
+                    <div class="spotlight-details">
+                        <h3>Grant’s Prints</h3>
+                        <p>Owned By Grant D</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MENUS -->
+        <div class="menu-grid">
+            <div class="menu-card">
+                <h2>🍿 Snacks</h2>
+                <ul class="item-list">
+                    <li>
+                        <strong>Snack House</strong>Owned By Ethan R<br>
+                        <a class="order-btn" href="https://forms.gle/FmzuiAhjz8rf22TU8" target="_blank">Order Now ➔</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-card">
+                <h2>👖 Retail Market</h2>
+                <ul class="item-list">
+                    <li>
+                        <strong>Aiden G's Mini Store of Trinkets</strong>Owned By Aiden G<br>
+                        <a class="order-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScd8fe1hy56OFIPe3W9uLlEcMuxTq5N6UPi7xyZ7YBYMbnX4g/viewform?usp=publish-editor"_blank">Order Now ➔</a>
+                    </li>
+                    <li>
+                        <strong>Grant's Prints</strong>Owned By Grant D<br>
+                        <a class="order-btn" href="https://forms.gle/6EXyJRUZKepJTGSH9" target="_blank">Order Now ➔</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-notice">Beta 1.5</div>
+
+</body>
+</html>
